@@ -1,0 +1,27 @@
+<div class="jumbotron">
+  <h2>Budget</h2>
+</div>
+<div class="jumbotron">
+<form action="/budget">
+  Add Money:
+  <input type="text" name="total" value="0.00">
+  <input type="submit" value="Submit">
+</form> 
+</div>
+
+<div class="jumbotron">
+<form action="/budget">
+  Item:
+  <input type="text" name="item" value="e.g. Hula Hoop">
+  <br>
+  Cost:
+  <input type="text" name="item" value="0.00">
+  <br>
+  <input type="submit" value="Submit">
+</form> 
+</div>
+
+<form action="/budget">
+  <input type="submit" value="Clear">
+</form>
+

@@ -1,0 +1,18 @@
+<div class="jumbotron">
+  <h2><%= gettext "Welcome to %{name}!", name: "Divvy-Lite" %></h2>
+  <p class="lead">A budgeting and accounting application.</p>
+</div>
+
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Resources</h4>
+    <ul>
+      <li>
+        <a href="/budget">Budget</a>
+      </li>
+      <li>
+        <a href="/accounting">Accounting</a>
+      </li>
+    </ul>
+  </div>
+</div>

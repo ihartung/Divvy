@@ -1,0 +1,38 @@
+<div class="jumbotron">
+  <h2>Accounting</h2>
+</div>
+<div class="jumbotron">
+Enter Transaction:
+<br>
+<form action="/accounting">
+  Label:
+  <input type="text" name="item" value="e.g. Groceries">
+  <br>
+  Amount:
+  <input type="text" name="item" value="0.00">
+  <br>
+  Category:
+   <select name="category">
+    <option value="blank"></option>   
+    <option value="personal">Personal</option>
+    <option value="business">Business</option>
+    <option value="other">Other</option>
+  </select>
+  <br>
+  Type:
+  <select name="type">
+    <option value="blank"></option> 
+    <option value="credit">Credit</option>
+    <option value="debit">Debit</option>
+  </select>
+  <br>
+  <input type="submit" value="Submit">
+</form> 
+</div>
+<form action="/accounting/graph">
+  <input type="submit" value="Generate Visual">
+</form>
+<form action="/accounting">
+  <input type="submit" value="Clear">
+</form> 
+ 
