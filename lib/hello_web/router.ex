@@ -5,7 +5,7 @@ defmodule HelloWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
-    plug :protect_from_forgery
+   # plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
@@ -17,12 +17,15 @@ defmodule HelloWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/budget", BudgetController, :index
-    get "/accounting", AccountingController, :index
+    get "/budget", BudgetController, :start
+    get "/budget/internal", BudgetController, :index
+    get "/accounting", AccountingController, :start
+    get "/accounting/internal", AccountingController, :index
+    post "/budget", BudgetController, :create
+    post "/budget/deposit", BudgetController, :add_money
+    get "/budget/:id", BudgetController, :delete
+    post "/accounting", AccountingController, :create
+    get "/accounting/:id", AccountingController, :delete
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", HelloWeb do
-  #   pipe_through :api
-  # end
 end

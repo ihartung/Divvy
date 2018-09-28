@@ -1,27 +1,46 @@
+<script>
+function validate_money(id) {
+    var regex = /^\d*\.\d{2}$/;
+    var numStr = document.getElementById(id).value;
+    if (!regex.test(numStr) || x=="") {
+                alert("Amount/Cost is invalid (X*.XX)");
+                return false;
+        }
+}
+</script>
+
 <div class="jumbotron">
   <h2>Budget</h2>
 </div>
 <div class="jumbotron">
-<form action="/budget">
-  Add Money:
-  <input type="text" name="total" value="0.00">
+<form action="/budget/deposit" method="post" onsubmit="return validate_money('balance');">
+  Add Money:$
+  <input id="balance" type="text" name="total" value="">
   <input type="submit" value="Submit">
 </form> 
 </div>
 
 <div class="jumbotron">
-<form action="/budget">
-  Item:
-  <input type="text" name="item" value="e.g. Hula Hoop">
+<form action="/budget" method="post" onsubmit="return validate_money('cost');">
+  Item:   
+  <input type="text" name="title" value="">
   <br>
-  Cost:
-  <input type="text" name="item" value="0.00">
+  Cost:$
+  <input id="cost" type="text" name="cost" value="">
   <br>
   <input type="submit" value="Submit">
 </form> 
 </div>
 
-<form action="/budget">
-  <input type="submit" value="Clear">
-</form>
+<div class="jumbotron">
+   <p>Remaining Balance: $<%= @total.total %></p>
+</div>
 
+<div class="panel-body">
+    <%= for expense <- @expenses do %>
+      <strong class="h3"><%= expense.title %> $<%= expense.cost %></strong>
+      <%= link "Clear", to: budget_path(@conn, :delete, expense), class: "btn btn-default btn-sm pull-right" %>
+      <hr>
+    <% end %>
+  </div>
+</div>

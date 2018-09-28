@@ -1,27 +1,38 @@
+<script>
+function validate_money(id) {
+    var regex = /^\d*\.\d{2}$/;
+    var numStr = document.getElementById(id).value;
+    if (!regex.test(numStr) || x=="") {
+                alert("Amount/Cost is invalid (X*.XX)");
+                return false;
+        }
+}
+</script>
+
 <div class="jumbotron">
   <h2>Accounting</h2>
 </div>
 <div class="jumbotron">
 Enter Transaction:
 <br>
-<form action="/accounting">
+<form action="/accounting" method="post" onsubmit="return validate_money('cost');">
   Label:
-  <input type="text" name="item" value="e.g. Groceries">
+  <input type="text" name="title" value="">
   <br>
-  Amount:
-  <input type="text" name="item" value="0.00">
+  Amount:$
+  <input id="cost" type="text" name="cost" value="">
   <br>
   Category:
    <select name="category">
-    <option value="blank"></option>   
+    <option value=""></option>   
     <option value="personal">Personal</option>
     <option value="business">Business</option>
     <option value="other">Other</option>
   </select>
   <br>
   Type:
-  <select name="type">
-    <option value="blank"></option> 
+  <select name="sign">
+    <option value=""></option> 
     <option value="credit">Credit</option>
     <option value="debit">Debit</option>
   </select>
@@ -29,10 +40,21 @@ Enter Transaction:
   <input type="submit" value="Submit">
 </form> 
 </div>
-<form action="/accounting/graph">
+
+<div class="jumbotron">
+   <p>Balance: $<%= @total.total %></p>
+</div>
+
+<div class="panel-body">
+    <%= for transaction <- @transactions do %>
+      <strong class="h3"><%= transaction.title %> $<%= transaction.cost %></strong>
+      <%= link "Clear", to: accounting_path(@conn, :delete, transaction), class: "btn btn-default btn-sm pull-right" %>
+      <hr>
+    <% end %>
+  </div>
+</div>
+
+<form action="/accounting/visual" method="get">
   <input type="submit" value="Generate Visual">
 </form>
-<form action="/accounting">
-  <input type="submit" value="Clear">
-</form> 
  
