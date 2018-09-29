@@ -25,6 +25,7 @@ defmodule HelloWeb.Router do
     post "/budget/deposit", BudgetController, :add_money
     get "/budget/:id", BudgetController, :delete
     post "/accounting", AccountingController, :create
+    get "/accounting/filter", AccountingController, :filter
     get "/accounting/:id", AccountingController, :delete
   end
 

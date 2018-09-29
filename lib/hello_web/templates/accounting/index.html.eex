@@ -54,7 +54,24 @@ Enter Transaction:
   </div>
 </div>
 
-<form action="/accounting/visual" method="get">
-  <input type="submit" value="Generate Visual">
+<div align="center">
+<form action="/accounting/filter" method="get">
+  Filter:
+   <select name="constraint">
+    <option value="none">None</option>
+    <option value="personal">Personal</option>
+    <option value="business">Business</option>
+    <option value="other">Other</option>
+    <option value="credit">Credit</option>
+    <option value="debit">Debit</option>
+  </select>
+  <input type="submit" value="Apply">
 </form>
- 
+</div> 
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Resources</h4>
+        <a href="/budget">Budget</a>
+  </div>
+</div>
+

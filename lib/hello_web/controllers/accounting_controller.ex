@@ -1,6 +1,7 @@
 defmodule HelloWeb.AccountingController do
   use HelloWeb, :controller
 
+import Ecto.Query
 alias Hello.Balance
 alias Hello.Accounting
 
@@ -38,6 +39,7 @@ def create(conn, params) do
 end
 
 def delete(conn, %{"id" => id}) do
+
 	expense = Hello.Repo.get!(Hello.Accounting, id)
 
 	increment = Decimal.div(expense.cost, -1)
@@ -45,7 +47,26 @@ def delete(conn, %{"id" => id}) do
 	Hello.Repo.delete!(expense)
 
 	conn
+        |> put_flash(:info, "Entry deleted, filters removed.")
 	|> redirect(to: accounting_path(conn, :index))
+end
+
+def filter(conn, %{"constraint" => constraint}) do
+
+	if String.match?(constraint, ~r/none/) do
+		redirect(conn, to: accounting_path(conn, :index))
+	end
+
+	total = get_balance()
+	query = from t in Hello.Accounting,
+		where: t.category == ^constraint or t.sign == ^constraint
+	transactions = Hello.Repo.all(query)
+
+	message = "Applied filter: " <> constraint	
+
+	conn
+        |> put_flash(:info, message)
+	|> render("index.html", total: total, transactions: transactions)
 end
 
 defp get_balance() do

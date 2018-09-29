@@ -44,3 +44,10 @@ function validate_money(id) {
     <% end %>
   </div>
 </div>
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Resources</h4>
+        <a href="/accounting">Accounting</a>
+  </div>
+</div>
+
